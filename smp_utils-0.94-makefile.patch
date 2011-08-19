@@ -1,0 +1,30 @@
+From 304453fa4dda47e5e94f7995cdd1d3b9086370ef Mon Sep 17 00:00:00 2001
+From: Dan Horak <dan@danny.cz>
+Date: Mon, 2 Feb 2009 17:31:42 +0100
+Subject: [PATCH] don't change ownership when installing the files
+
+---
+ Makefile |    4 ++--
+ 1 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/Makefile b/Makefile
+index f87d0a6..9f19e43 100644
+--- a/Makefile
++++ b/Makefile
+@@ -122,11 +122,11 @@ smp_rep_exp_route_tbl: smp_rep_exp_route_tbl.o libsmp.a
+ install: $(EXECS)
+ 	install -d $(INSTDIR)
+ 	for name in $^; \
+-	 do install -s -o root -g root -m 755 $$name $(INSTDIR); \
++	 do install -m 755 $$name $(INSTDIR); \
+ 	done
+ 	install -d $(MANDIR)/$(MAN_PREF)
+ 	for mp in $(MAN_PGS); \
+-	 do install -o root -g root -m 644 doc/$$mp $(MANDIR)/$(MAN_PREF); \
++	 do install -m 644 doc/$$mp $(MANDIR)/$(MAN_PREF); \
+ 	 gzip -9f $(MANDIR)/$(MAN_PREF)/$$mp; \
+ 	done
+ 
+-- 
+1.6.0.6
+
